@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densitydpi=medium-dpi, user-scalable=0" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <title>Hello World</title>
+    </head>
+    <body>
+       
+            <h1>Dixneuf Baptiste</h1>
+           
+            <div id="donnees"></div>
+           
+       
+        <script type="text/javascript" src="cordova.js"></script>
+        <script src="js/jquery.js" ></script>
+        <script>
+        $(function() {
+            $.getJSON('http://baptistedixneuf.fr/site/apis/?method=index&jsoncallback=?', function(donnees) {
+                    for (var i in donnees) {
+                    $('#donnees').append('<p><b>ID</b> : ' + donnees[i].id + '</p>');
+                    $('#donnees').append('<p><b>Titre</b> : ' + donnees[i].name + '</p>');
+
+                    //On corrige les problèmes de lien relatif en absolu pour les images du site
+                    var contenu= donnees[i].content;
+                    function replaceAll(machaine, chaineARemaplacer, chaineDeRemplacement) {
+                        return machaine.replace(new RegExp(chaineARemaplacer, 'g'),chaineDeRemplacement);
+                    }
+                    var contenu_propre= replaceAll(contenu, 'src="/site', 'src="http://baptistedixneuf.fr/site'); 
+
+                    
+                    $('#donnees').append('<p><b>En ligne</b> : ' + contenu_propre + '</p>');
+                    $('#donnees').append('<p><b> Date de création </b> : ' + donnees[i].created + '</p>');
+
+                }
+            });
+            console.log(donnees);
+          });
+        </script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
+</html>
