@@ -9,17 +9,54 @@
         <meta name="msapplication-tap-highlight" content="no" />
         <title>Hello World</title>
     </head>
-    <body>
-       
-            <h1>Dixneuf Baptiste</h1>
-           
-            <div id="donnees"></div>
+    <body >
+        <div class="site-container">
+            <div class="site-pusher">
+                <header class="header">
+                    <a href="#" class="header__icon" id="header__icon">
+                    <a href="" class="header__logo">Dixneuf Baptiste</a>
+                    </a>
+                    <nav class="menu">
+                        <a href="/site/">Blog</a>
+                        <a href="/site/pages/turoriels-4" title="Tutoriels">Tutoriels</a>
+                        <a href="/site/pages/btssio-9" title="BTS">BTS</a>
+                        <a href="/site/pages/loisirs-14" title="Loisirs">Loisirs</a>
+                        <a href="/site/links/index">Liens</a>
+                        <a class="twitter" href="https://twitter.com/Xhelty19" target="_blank">Twitter</a>
+                        <a class="gplus" href="https://plus.google.com/+BaptisteDixneuf19/?rel=author" target="_blank">Google + </a>
+                        <a class=" GitHub" href="https://github.com/BaptisteDixneuf" target="_blank"> GitHub </a>
+                    </nav>
+                </header>
+                <div class="site-content">
+                    <div class="container">
+                        <!-- Le contenu du site -->
+                        <div id="donnees"></div>
+                    </div>
+                </div>
+                <div class="site-cache" id="site-cache">
+                </div>
+            </div>
+        </div>   
+            
            
        
         <script type="text/javascript" src="cordova.js"></script>
         <script src="js/jquery.js" ></script>
         <script>
         $(function() {
+
+             /* Quand je clique sur l'icône hamburger je rajoute une classe au body */
+            $('#header__icon').click(function(e){
+                e.preventDefault();
+                $('body').toggleClass('with--sidebar');
+            });
+         
+            /* Je veux pouvoir masquer le menu si on clique sur le cache */
+            $('#site-cache').click(function(e){
+                $('body').removeClass('with--sidebar');
+            })
+
+
             $.getJSON('http://baptistedixneuf.fr/site/apis/?method=index&jsoncallback=?', function(donnees) {
                     for (var i in donnees) {
                     $('#donnees').append('<p><b>ID</b> : ' + donnees[i].id + '</p>');
@@ -33,7 +70,7 @@
                     var contenu_propre= replaceAll(contenu, 'src="/site', 'src="http://baptistedixneuf.fr/site'); 
 
                     
-                    $('#donnees').append('<p><b>En ligne</b> : ' + contenu_propre + '</p>');
+                    $('#donnees').append('<p><b>Contenu</b> : ' + contenu_propre + '</p>');
                     $('#donnees').append('<p><b> Date de création </b> : ' + donnees[i].created + '</p>');
 
                 }
