@@ -81,7 +81,7 @@
                         $('body').removeClass('with--sidebar');
                         $('#donnees').remove();
                         $('.container').append('<div id="donnees"></div>');
-                        $('#donnees').append('Some text - PAGES');
+                        $('#donnees').append('En construction, à venir dans la prochaine version');
 
                 });
 
@@ -95,7 +95,7 @@
 
                         $.getJSON('http://baptistedixneuf.fr/site/apis/liens/?method=liens&jsoncallback=?', function(donnees) {
                         for (var i in donnees) {
-                            $('#donnees').append('<div class="cards-title">' + donnees[i].link + '</div>');
+                            $('#donnees').append('<div class="cards-title"><a href="' + donnees[i].link + '"">'+ donnees[i].link+'</a></div>');
                             $('#donnees').append('<div class="cards-content">' + donnees[i].content + '</div>');
                         }
                         });
