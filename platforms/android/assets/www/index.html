@@ -17,14 +17,10 @@
                     <a href="" class="header__logo">Dixneuf Baptiste</a>
                     </a>
                     <nav class="menu">
-                        <a href="/site/">Blog</a>
-                        <a href="/site/pages/turoriels-4" title="Tutoriels">Tutoriels</a>
-                        <a href="/site/pages/btssio-9" title="BTS">BTS</a>
-                        <a href="/site/pages/loisirs-14" title="Loisirs">Loisirs</a>
-                        <a href="/site/links/index">Liens</a>
-                        <a class="twitter" href="https://twitter.com/Xhelty19" target="_blank">Twitter</a>
-                        <a class="gplus" href="https://plus.google.com/+BaptisteDixneuf19/?rel=author" target="_blank">Google + </a>
-                        <a class=" GitHub" href="https://github.com/BaptisteDixneuf" target="_blank"> GitHub </a>
+                        <a href="">Blog</a>
+                        <a href="" id="pages" >Pages</a>
+                        <a href="" id="liens" >Liens</a>
+                       
                     </nav>
                 </header>
                 <div class="site-content">
@@ -45,6 +41,8 @@
         <script>
         $(function() {
 
+             /* ---------- MENU ---------- */
+
              /* Quand je clique sur l'icône hamburger je rajoute une classe au body */
             $('#header__icon').click(function(e){
                 e.preventDefault();
@@ -56,26 +54,55 @@
                 $('body').removeClass('with--sidebar');
             })
 
+            /* ---------- AFFICHAGE ---------- */
+                /* ---------- BLOG ---------- */
 
-            $.getJSON('http://baptistedixneuf.fr/site/apis/?method=index&jsoncallback=?', function(donnees) {
-                    for (var i in donnees) {
-                    /*$('#donnees').append('<p><b>ID</b> : ' + donnees[i].id + '</p>');*/
-                    $('#donnees').append('<div class="cards-title">' + donnees[i].name + '</div>');
+                $.getJSON('http://baptistedixneuf.fr/site/apis/blog/?method=blog&jsoncallback=?', function(donnees) {
+                        for (var i in donnees) {
+                        /*$('#donnees').append('<p><b>ID</b> : ' + donnees[i].id + '</p>');*/
+                        $('#donnees').append('<div class="cards-title">' + donnees[i].name + '</div>');
 
-                    //On corrige les problèmes de lien relatif en absolu pour les images du site
-                   /*/ var contenu= donnees[i].content;
-                    function replaceAll(machaine, chaineARemaplacer, chaineDeRemplacement) {
-                        return machaine.replace(new RegExp(chaineARemaplacer, 'g'),chaineDeRemplacement);
+                        
+                        var contenu= donnees[i].content;
+                       /* function replaceAll(machaine, chaineARemaplacer, chaineDeRemplacement) {
+                            return machaine.replace(new RegExp(chaineARemaplacer, 'g'),chaineDeRemplacement);
+                        }
+                        var contenu_propre= replaceAll(contenu, 'file://', 'http://');*/
+
+                        
+                        $('#donnees').append('<div class="cards-content">' + contenu + '</p>');
+                        
                     }
-                    var contenu_propre= replaceAll(contenu, 'src="/site', 'src="http://baptistedixneuf.fr/site'); */
+                });
 
-                    
-                    $('#donnees').append('<div class="cards-content">' + donnees[i].content + '</div>');
-                    /*$('#donnees').append('<p><b> Date de création </b> : ' + donnees[i].created + '</p>');*/
+                /* ---------- PAGES ---------- */
+                $('#pages').click(function(e){
+                        e.preventDefault();
+                        $('body').removeClass('with--sidebar');
+                        $('#donnees').remove();
+                        $('.container').append('<div id="donnees"></div>');
+                        $('#donnees').append('Some text - PAGES');
 
-                }
-            });
-            console.log(donnees);
+                });
+
+                 /* ---------- PAGES ---------- */
+                $('#liens').click(function(e){
+                        e.preventDefault();
+                        $('body').removeClass('with--sidebar');
+                        $('#donnees').remove();
+                        $('.container').append('<div id="donnees"></div>');
+                        
+
+                        $.getJSON('http://baptistedixneuf.fr/site/apis/liens/?method=liens&jsoncallback=?', function(donnees) {
+                        for (var i in donnees) {
+                            $('#donnees').append('<div class="cards-title">' + donnees[i].link + '</div>');
+                            $('#donnees').append('<div class="cards-content">' + donnees[i].content + '</div>');
+                        }
+                        });
+
+                });
+
+           // 
           });
         </script>
         <script type="text/javascript" src="js/index.js"></script>
