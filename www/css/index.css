@@ -33,9 +33,10 @@ img{
   }
 }
 
-
+/*****************  RESPONSIVE **********************/
 
 html,body{
+  background-color: rgb(238, 238, 238);
   font-family:Roboto;
   font-size:16px;
   line-height:1.4;
@@ -102,7 +103,7 @@ a{
     }
     .site-content {
       position: absolute;
-      top: 66px;
+      top: 80px;
       right: 0;
       left: 0;
       bottom: 0;
@@ -170,3 +171,24 @@ a{
       background-color: rgba(0, 0, 0, 0.6);
     }
   }
+
+/*****************  CARDS **********************/
+
+.cards-title{
+  font-size: 24px;
+  background-color: #00bad2;
+  color: white;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  box-shadow:  rgba(0, 0, 0, 0.0980392) 0px 3px 5px, rgba(0, 0, 0, 0.0980392) 0px 3px 10px;
+  padding-left: 10px;
+  
+}
+.cards-content{
+  background-color: white;
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+  margin-bottom: 20px;
+  text-align: justify;
+  padding: 10px;
+}

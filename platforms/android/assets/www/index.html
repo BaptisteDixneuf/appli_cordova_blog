@@ -59,19 +59,19 @@
 
             $.getJSON('http://baptistedixneuf.fr/site/apis/?method=index&jsoncallback=?', function(donnees) {
                     for (var i in donnees) {
-                    $('#donnees').append('<p><b>ID</b> : ' + donnees[i].id + '</p>');
-                    $('#donnees').append('<p><b>Titre</b> : ' + donnees[i].name + '</p>');
+                    /*$('#donnees').append('<p><b>ID</b> : ' + donnees[i].id + '</p>');*/
+                    $('#donnees').append('<div class="cards-title">' + donnees[i].name + '</div>');
 
                     //On corrige les problèmes de lien relatif en absolu pour les images du site
-                    var contenu= donnees[i].content;
+                   /*/ var contenu= donnees[i].content;
                     function replaceAll(machaine, chaineARemaplacer, chaineDeRemplacement) {
                         return machaine.replace(new RegExp(chaineARemaplacer, 'g'),chaineDeRemplacement);
                     }
-                    var contenu_propre= replaceAll(contenu, 'src="/site', 'src="http://baptistedixneuf.fr/site'); 
+                    var contenu_propre= replaceAll(contenu, 'src="/site', 'src="http://baptistedixneuf.fr/site'); */
 
                     
-                    $('#donnees').append('<p><b>Contenu</b> : ' + contenu_propre + '</p>');
-                    $('#donnees').append('<p><b> Date de création </b> : ' + donnees[i].created + '</p>');
+                    $('#donnees').append('<div class="cards-content">' + donnees[i].content + '</div>');
+                    /*$('#donnees').append('<p><b> Date de création </b> : ' + donnees[i].created + '</p>');*/
 
                 }
             });
